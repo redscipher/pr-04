@@ -1,0 +1,15 @@
+// importacoes
+@use '../variaveis';
+
+// mixins
+@mixin texto($tamanhoFonte: 16px){
+    font-size: $tamanhoFonte;
+    line-height: $tamanhoFonte + 10px;
+    color: variaveis.$corTextoPrincipal;
+}
+
+@mixin titulo($tamanhoFonte: 28px){
+    @include texto($tamanhoFonte);
+    // ---------------------
+    color: variaveis.$corTextoSecundario;
+}

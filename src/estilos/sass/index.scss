@@ -1,2 +1,40 @@
 // importacoes
-@use './configs/base.scss';
+@use './configs/base';
+@use './variaveis';
+@use './mixins/mixins';
+@use './configs/hero';
+
+body{
+    background-color: variaveis.$corDeFundo;
+}
+
+// classes
+.texto--grande{
+    @include mixins.texto(18px);
+}
+
+.texto{
+    @include mixins.texto;
+}
+
+.texto--pequeno{
+    @include mixins.texto(12px);
+}
+
+.titulo--grande{
+    @include mixins.titulo(48px);
+}
+
+.titulo{
+    @include mixins.titulo(40px);
+}
+
+.titulo--pequeno{
+    @include mixins.titulo(28px);
+}
+
+.link-texto{
+    @include mixins.texto(18px);
+    color: variaveis.$corTextoSecundario;
+    text-decoration: underline;
+}
