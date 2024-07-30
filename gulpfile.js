@@ -1,9 +1,24 @@
 // importacoes
 const gulp = require('gulp');
 const sass = require('gulp-sass')(require('sass'));
-const sourcemaps = require('gulp-sourcemaps')
+const sourcemaps = require('gulp-sourcemaps');
+const imagemin = require('gulp-imagemin');
 
-// funcoes
+// funcoes ==> ambos ambientes
+let comprimeImagens = function(){
+    try {
+        // objeto
+        let obj = gulp.src(['./imagens/**/*'])
+                    .pipe(imagemin())
+                    .pipe(gulp.dest('./build/imagens'));
+        // def retorno
+        return obj;
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
+// dev
 let compilaSASS = function(){
     try {
         // objeto
@@ -19,6 +34,25 @@ let compilaSASS = function(){
     }
 }
 
+let executaTarefas = async function(){
+    try {
+        // inicia tarefas em paralelo
+        gulp.parallel(comprimeImagens(), compilaSASS());
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
+let executaWatch = function(){
+    try {
+        // inicia observacao dos arquivos
+        gulp.watch(['./src/**/*'], {ignoreInitial:false}, executaTarefas);
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
+// producao
 let compilaSASSDist = function(){
     try {
         // objeto
@@ -36,28 +70,10 @@ let compilaSASSDist = function(){
     }
 }
 
-let executaTarefas = async function(){
-    try {
-        // inicia tarefas em paralelo
-        gulp.parallel(compilaSASS());
-    } catch (error) {
-        console.log(error.message);
-    }
-}
-
 let executaTarefasDist = async function(){
     try {
         // inicia tarefas em paralelo
-        gulp.parallel(compilaSASSDist());
-    } catch (error) {
-        console.log(error.message);
-    }
-}
-
-let executaWatch = function(){
-    try {
-        // inicia observacao dos arquivos
-        gulp.watch(['./src/**/*'], {ignoreInitial:false}, executaTarefas);
+        gulp.parallel(comprimeImagens(), compilaSASSDist());
     } catch (error) {
         console.log(error.message);
     }

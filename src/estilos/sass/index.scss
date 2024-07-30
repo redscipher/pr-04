@@ -1,5 +1,2 @@
-$bgCor: red;
-
-body{
-    background-color: $bgCor;
-}
+// importacoes
+@use './configs/base.scss';
