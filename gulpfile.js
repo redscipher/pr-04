@@ -3,10 +3,16 @@ const gulp = require('gulp');
 const sass = require('gulp-sass')(require('sass'));
 const sourcemaps = require('gulp-sourcemaps');
 const imagemin = require('gulp-imagemin');
+const htmlmin = require('gulp-htmlmin');
+const replace = require('gulp-replace');
+const uglify = require('gulp-uglify');
+const clean = require('gulp-clean');
+const pipeline = require('readable-stream').pipeline;
 
 // funcoes ==> ambos ambientes
 let comprimeImagens = function(){
     try {
+        console.log('comprimindo imagens');
         // objeto
         let obj = gulp.src(['./imagens/**/*'])
                     .pipe(imagemin())
@@ -21,6 +27,7 @@ let comprimeImagens = function(){
 // dev
 let compilaSASS = function(){
     try {
+        console.log('compilando sass dev');
         // objeto
         let obj = gulp.src(['./src/estilos/sass/**/*.scss'])
                     .pipe(sourcemaps.init())
@@ -34,10 +41,26 @@ let compilaSASS = function(){
     }
 }
 
+let execSubstituicao = function() {
+    try {
+        console.log('substituindo dev');
+        // executa substituicao de string
+        return gulp.src(['./index.html'])
+            .pipe(replace('ARQUIVO_CSS', './css/index.css'))
+            .pipe(replace('ARQUIVO_JS', '../../src/js/index.js'))
+            .pipe(gulp.dest('./build/dev'));
+    } catch (error) {
+            console.log(error.message);
+    }
+}
+
 let executaTarefas = async function(){
     try {
-        // inicia tarefas em paralelo
-        gulp.parallel(comprimeImagens(), compilaSASS());
+        console.log('tarefas dev');
+        // tarefas
+        compilaSASS();
+        // inicia tarefas em pararelo
+        gulp.series(comprimeImagens(), execSubstituicao());
     } catch (error) {
         console.log(error.message);
     }
@@ -45,8 +68,9 @@ let executaTarefas = async function(){
 
 let executaWatch = function(){
     try {
+        console.log('escutando dev');
         // inicia observacao dos arquivos
-        gulp.watch(['./src/**/*'], {ignoreInitial:false}, executaTarefas);
+        gulp.watch(['./index.html', './src/**/*'], {ignoreInitial:false}, executaTarefas);
     } catch (error) {
         console.log(error.message);
     }
@@ -55,6 +79,7 @@ let executaWatch = function(){
 // producao
 let compilaSASSDist = function(){
     try {
+        console.log('compilando sass dist')
         // objeto
         let obj = gulp.src(['./src/estilos/sass/**/*.scss'])
                     .pipe(sourcemaps.init())
@@ -70,17 +95,78 @@ let compilaSASSDist = function(){
     }
 }
 
-let executaTarefasDist = async function(){
+let minificaHTML = function(){
     try {
-        // inicia tarefas em paralelo
-        gulp.parallel(comprimeImagens(), compilaSASSDist());
+        console.log('minificando html dist')
+        // executa minificacao
+        return gulp.src(['./index.html'])
+            .pipe(htmlmin({
+                collapseWhitespace: true,
+                removeComments: true
+            }))
+            .pipe(gulp.dest('./prebuild'));
     } catch (error) {
         console.log(error.message);
     }
 }
 
-// exportacoes
-exports.default = executaTarefas;
-exports.watch = executaWatch;
+let execSubstituicaoDist = function() {
+    try {
+        console.log('substituindo dist');   
+        // executa substituicao de string
+        return gulp.src(['./prebuild/index.html'])
+            .pipe(replace('ARQUIVO_CSS', './css/index.css'))
+            .pipe(replace('ARQUIVO_JS', './js/index.js'))
+            .pipe(gulp.dest('./build/dist'));
+    } catch (error) {
+            console.log(error.message);
+    }
+}
+
+let minificaJS = function(){
+    try {
+        console.log('minificando js dist');
+        // executa compressoes js
+        return pipeline(gulp.src(['./src/js/*.js']),
+                    uglify(),
+                    gulp.dest('./build/dist/js')
+                );
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
+let deletaTemps = function(){
+    try {
+        console.log('deletando pastas');
+        // deleta pastas
+        return gulp.src(['./prebuild'])
+            .pipe(clean({
+                force: true
+            }));
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
+let executaTarefasDist = async function(){
+    try {
+        console.log('tarefas dist');
+        // executa tarefas em serie
+        minificaHTML()
+        compilaSASSDist()
+        // minificaJS();
+        // inicia tarefas em paralelo
+        gulp.parallel(comprimeImagens(), execSubstituicaoDist());
+        // ----------
+        deletaTemps();
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
+// tarefas
+gulp.task('default', gulp.parallel(executaTarefas));
+gulp.task('watch', gulp.parallel(executaWatch));
 // compila producao
-exports.compila_prod = executaTarefasDist;
+gulp.task('compila_prod', gulp.parallel(executaTarefasDist));

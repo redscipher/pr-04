@@ -5,108 +5,111 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Documento</title>
     <!-- estilos -->
-    <link rel="stylesheet" href="./build/dev/css/index.css">
+    <link rel="stylesheet" href="ARQUIVO_CSS">
 </head>
 <body>
-    <section class="hero">
-        <div class="hero__conteudo">
-            <h1 class="hero__conteudo__marca">
-                <img src="./build/imagens/disneyplus.svg" alt="Disney plus">
-            </h1>
-            <h3 class="titulo--pequeno">
-                As melhores histórias em um só lugar.
-            </h3>
-            <p>
-                <a href="#" class="link-texto">Assinar o Disney Plus</a> <br>
-                <span class="texto">
-                    R$ 27,99/mês ou R$279,90/ano à vista*
-                </span>
-            </p>
-            <ul class="hero__conteudo__combos">
-                <li class="hero__conteudo__combos__item">
-                    <img src="./build/imagens/logos/disney_star_plus.png" alt="Logo do Disney Star Plus">
-                    <button>Assine agora</button>
-                    <span class="texto">R$ 45,90/mes*</span>
+    <!-- principal -->
+    <main>
+        <section class="hero">
+            <div class="hero__conteudo">
+                <h1 class="hero__conteudo__marca">
+                    <img src="../imagens/disneyplus.svg" alt="Disney plus">
+                </h1>
+                <h3 class="titulo--pequeno">
+                    As melhores histórias em um só lugar.
+                </h3>
+                <p>
+                    <a href="#" class="link-texto">Assinar o Disney Plus</a> <br>
+                    <span class="texto">
+                        R$ 27,99/mês ou R$279,90/ano à vista*
+                    </span>
+                </p>
+                <ul class="hero__conteudo__combos">
+                    <li class="hero__conteudo__combos__item">
+                        <img src="../imagens/logos/disney_star_plus.png" alt="Logo do Disney Star Plus">
+                        <button>Assine agora</button>
+                        <span class="texto">R$ 45,90/mes*</span>
+                    </li>
+                    <li class="hero__conteudo__combos__item">
+                        <img src="../imagens/logos/disney_star_plus_starzplay.png" alt="Logo do Disney Starzplay">
+                        <button>Assine agora</button>
+                        <span class="texto">R$ 45,90/mes*</span>
+                    </li>
+                </ul>
+                <p class="texto--pequeno">
+                    O preço pode variar caso a assinatura seja feita através de outras plataformas.
+                </p>
+            </div>
+        </section>
+        <section class="shows">
+            <nav class="shows__abas">
+                <button data-aba-botao="em-breve" class="shows__abas__botao shows__abas__botao--is-ativo">Em breve</button>
+                <button data-aba-botao="populares" class="shows__abas__botao">Mais populares</button>
+                <button data-aba-botao="starplus" class="shows__abas__botao">Mais no Star+</button>
+            </nav>
+            <ul data-aba-id="em-breve" class="shows__lista shows__lista--is-ativo">
+                <li class="shows__lista__item">
+                    <img src="../imagens/em_breve/spidey.jpg" alt="Spidey">
                 </li>
-                <li class="hero__conteudo__combos__item">
-                    <img src="./build/imagens/logos/disney_star_plus_starzplay.png" alt="Logo do Disney Starzplay">
-                    <button>Assine agora</button>
-                    <span class="texto">R$ 45,90/mes*</span>
+                <li class="shows__lista__item">
+                    <img src="../imagens/em_breve/desencantada.jpg" alt="Desencantada">
+                </li>
+                <li class="shows__lista__item">
+                    <img src="../imagens/em_breve/lobisomem.jpg" alt="Lobisomem">
+                </li>
+                <li class="shows__lista__item">
+                    <img src="../imagens/em_breve/sem_limites.jpg" alt="Sem limites">
+                </li>
+                <li class="shows__lista__item">
+                    <img src="../imagens/em_breve/the_santa_clauses.jpg" alt="Papai noel">
+                </li>
+                <li class="shows__lista__item">
+                    <img src="../imagens/em_breve/willow.jpg" alt="Willow">
                 </li>
             </ul>
-            <p class="texto--pequeno">
-                O preço pode variar caso a assinatura seja feita através de outras plataformas.
-            </p>
-        </div>
-    </section>
-    <section class="shows">
-        <nav class="shows__abas">
-            <button data-tab-button="em-breve" class="shows__abas__botao shows__abas__botao--is-ativo">Em breve</button>
-            <button data-tab-button="populares" class="shows__abas__botao">Mais populares</button>
-            <button data-tab-button="starplus" class="shows__abas__botao">Mais no Star+</button>
-        </nav>
-        <ul data-tab-id="em-breve" class="shows__lista shows__lista--is-ativo">
-            <li class="shows__lista__item">
-                <img src="./build/imagens/em_breve/spidey.jpg" alt="Spidey">
-            </li>
-            <li class="shows__lista__item">
-                <img src="./build/imagens/em_breve/desencantada.jpg" alt="Desencantada">
-            </li>
-            <li class="shows__lista__item">
-                <img src="./build/imagens/em_breve/lobisomem.jpg" alt="Lobisomem">
-            </li>
-            <li class="shows__lista__item">
-                <img src="./build/imagens/em_breve/sem_limites.jpg" alt="Sem limites">
-            </li>
-            <li class="shows__lista__item">
-                <img src="./build/imagens/em_breve/the_santa_clauses.jpg" alt="Papai noel">
-            </li>
-            <li class="shows__lista__item">
-                <img src="./build/imagens/em_breve/willow.jpg" alt="Willow">
-            </li>
-        </ul>
-        <ul data-tab-id="populares" class="shows__lista">
-            <li class="shows__lista__item">
-                <img src="./build/imagens/mais_populares/bluey.jpg" alt="Bluey">
-            </li>
-            <li class="shows__lista__item">
-                <img src="./build/imagens/mais_populares/cavaleira_da_lua.jpg" alt="Cavaleiro da lua">
-            </li>
-            <li class="shows__lista__item">
-                <img src="./build/imagens/mais_populares/o_incrivel_dr_pol.jpg" alt="O incrivel Dr. Pol">
-            </li>
-            <li class="shows__lista__item">
-                <img src="./build/imagens/mais_populares/obi_wan.jpg" alt="Obi wan">
-            </li>
-            <li class="shows__lista__item">
-                <img src="./build/imagens/mais_populares/red.jpg" alt="Red">
-            </li>
-            <li class="shows__lista__item">
-                <img src="./build/imagens/mais_populares/tudo_igual_sqn.jpg" alt="Tudo igual sqn">
-            </li>
-        </ul>
-        <ul data-tab-id="starplus" class="shows__lista">
-            <li class="shows__lista__item">
-                <img src="./build/imagens/mais_no_star_plus/belair.jpg" alt="Belair">
-            </li>
-            <li class="shows__lista__item">
-                <img src="./build/imagens/mais_no_star_plus/libertadores.jpg" alt="Libertadores">
-            </li>
-            <li class="shows__lista__item">
-                <img src="./build/imagens/mais_no_star_plus/nba.jpg" alt="nba">
-            </li>
-            <li class="shows__lista__item">
-                <img src="./build/imagens/mais_no_star_plus/os_simpson.jpg" alt="Os simpsons">
-            </li>
-            <li class="shows__lista__item">
-                <img src="./build/imagens/mais_no_star_plus/premier_league.jpg" alt="Premier Liga">
-            </li>
-            <li class="shows__lista__item">
-                <img src="./build/imagens/mais_no_star_plus/the_kardashians.jpg" alt="As kardashians">
-            </li>
-        </ul>
-    </section>
+            <ul data-aba-id="populares" class="shows__lista">
+                <li class="shows__lista__item">
+                    <img src="../imagens/mais_populares/bluey.jpg" alt="Bluey">
+                </li>
+                <li class="shows__lista__item">
+                    <img src="../imagens/mais_populares/cavaleira_da_lua.jpg" alt="Cavaleiro da lua">
+                </li>
+                <li class="shows__lista__item">
+                    <img src="../imagens/mais_populares/o_incrivel_dr_pol.jpg" alt="O incrivel Dr. Pol">
+                </li>
+                <li class="shows__lista__item">
+                    <img src="../imagens/mais_populares/obi_wan.jpg" alt="Obi wan">
+                </li>
+                <li class="shows__lista__item">
+                    <img src="../imagens/mais_populares/red.jpg" alt="Red">
+                </li>
+                <li class="shows__lista__item">
+                    <img src="../imagens/mais_populares/tudo_igual_sqn.jpg" alt="Tudo igual sqn">
+                </li>
+            </ul>
+            <ul data-aba-id="starplus" class="shows__lista">
+                <li class="shows__lista__item">
+                    <img src="../imagens/mais_no_star_plus/belair.jpg" alt="Belair">
+                </li>
+                <li class="shows__lista__item">
+                    <img src="../imagens/mais_no_star_plus/libertadores.jpg" alt="Libertadores">
+                </li>
+                <li class="shows__lista__item">
+                    <img src="../imagens/mais_no_star_plus/nba.jpg" alt="nba">
+                </li>
+                <li class="shows__lista__item">
+                    <img src="../imagens/mais_no_star_plus/os_simpson.jpg" alt="Os simpsons">
+                </li>
+                <li class="shows__lista__item">
+                    <img src="../imagens/mais_no_star_plus/premier_league.jpg" alt="Premier Liga">
+                </li>
+                <li class="shows__lista__item">
+                    <img src="../imagens/mais_no_star_plus/the_kardashians.jpg" alt="As kardashians">
+                </li>
+            </ul>
+        </section>
+    </main>
     <!-- scripts -->
-    <script type="text/javascript" src="./src/js/index.js"></script>
+    <script type="text/javascript" src="ARQUIVO_JS"></script>
 </body>
 </html>
