@@ -1,0 +1,48 @@
+// importacoes
+@use '../variaveis';
+
+.shows{
+    padding: 2vw 5.6vw;
+    
+    // classes
+    &__lista{
+        display: none;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+        margin-top: 44px;
+
+        // classes
+        &__item{
+            img{
+                max-width: 100%;
+                border-radius: 4px;
+            }
+        }
+
+        &--is-ativo{
+            display: grid;
+
+        }
+    }
+
+    &__abas{
+        display: flex;
+        justify-content: center;
+
+        //classes
+        &__botao{
+            color: variaveis.$corTextoSecundario;
+            font-size: 20px;
+            border: none;
+            padding-bottom: 5px;
+            background: none;
+            text-transform: uppercase;
+            margin: 0 1vw;
+
+            // classes
+            &--is-ativo{
+                border-bottom: 5px solid variaveis.$corTextoSecundario;
+            }
+        }
+    }
+}

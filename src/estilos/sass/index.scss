@@ -3,24 +3,11 @@
 @use './variaveis';
 @use './mixins/mixins';
 @use './configs/hero';
-
-// fontes
-@font-face{
-    font-family: Avenir;
-    src: url('../../../fontes/Avenir-Regular.woff2');
-    font-weight: 400;
-}
-
-@font-face{
-    font-family: Avenir;
-    src: url('../../../fontes/Avenir-Bold.woff2');
-    font-weight: 700;
-}
+@use './configs/shows';
 
 // elementos
 body{
     background-color: variaveis.$corDeFundo;
-    font-family: Avenir, sans-serif;
 }
 
 // classes
