@@ -1,6 +1,10 @@
 // evento espera carregar pagina
 document.addEventListener('DOMContentLoaded', function(){
 
+    // constantes
+    const botoes = document.querySelectorAll('[data-aba-botao]');
+    const perguntas = document.querySelectorAll('[data-faq-pergunta]');
+
     // funcoes
     let execEscondeAbas = function(){
         try {
@@ -28,8 +32,18 @@ document.addEventListener('DOMContentLoaded', function(){
         }
     }
 
-    // seleciona todos botoes controle de abas
-    const botoes = document.querySelectorAll('[data-aba-botao]');
+    let AbreFechaResposta = function(e){
+        try {
+            // classe
+            const classe = 'faq__perguntas__item--aberto';
+            // pai do elemento clicado
+            const elementoPai = e.target.parentNode;
+            // adiciona/remove classes
+            elementoPai.classList.toggle(classe);
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
 
     // loop p/ adicionar eventos a todos os botoes
     for(let i = 0; i < botoes.length; i++){
@@ -44,5 +58,9 @@ document.addEventListener('DOMContentLoaded', function(){
             aba.classList.add('shows__lista--is-ativo');
             botao.target.classList.add('shows__abas__botao--is-ativo');
         })
+    }
+
+    for(let i = 0; i < perguntas.length; i++){
+        perguntas[i].addEventListener('click', AbreFechaResposta);
     }
 })
