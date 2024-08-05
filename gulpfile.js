@@ -49,7 +49,7 @@ let execSubstituicao = function() {
         return gulp.src(['./index.html'])
             .pipe(replace('ARQUIVO_CSS', './css/index.css'))
             .pipe(replace('ARQUIVO_JS', '../../src/js/index.js'))
-            .pipe(replace('LOCAL_IMG', '../imagens'))
+            .pipe(replace('./imagens', '../imagens'))
             .pipe(gulp.dest('./build/dev'));
     } catch (error) {
             console.log(error.message);
