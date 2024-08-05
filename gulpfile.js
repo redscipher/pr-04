@@ -183,4 +183,3 @@ gulp.task('default', executaTarefas);
 gulp.task('watch', executaWatch);
 // compila producao
 gulp.task('compila_prod', gulp.series(minificaHTML, executaTarefasDist, deletaTemps));
-gulp.task('html', minificaHTML);
