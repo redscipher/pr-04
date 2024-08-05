@@ -17,7 +17,21 @@ let comprimeImagens = function(){
         // objeto
         let obj = gulp.src(['./imagens/**/*'])
                     .pipe(imagemin())
-                    .pipe(gulp.dest('./build/imagens'));
+                    .pipe(gulp.dest('./build/dev/imagens'));
+        // def retorno
+        return obj;
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
+let comprimeImagensDist = function(){
+    try {
+        console.log('comprimindo imagens');
+        // objeto
+        let obj = gulp.src(['./imagens/**/*'])
+                    .pipe(imagemin())
+                    .pipe(gulp.dest('./build/dist/imagens'));
         // def retorno
         return obj;
     } catch (error) {
@@ -49,7 +63,6 @@ let execSubstituicao = function() {
         return gulp.src(['./index.html'])
             .pipe(replace('ARQUIVO_CSS', './css/index.css'))
             .pipe(replace('ARQUIVO_JS', '../../src/js/index.js'))
-            .pipe(replace('./imagens', '../../imagens'))
             .pipe(gulp.dest('./build/dev'));
     } catch (error) {
             console.log(error.message);
@@ -120,7 +133,6 @@ let execSubstituicaoDist = function() {
         return gulp.src(['./prebuild/index.html'])
             .pipe(replace('ARQUIVO_CSS', './css/index.css'))
             .pipe(replace('ARQUIVO_JS', './js/index.js'))
-            .pipe(replace('./imagens', '../../imagens'))
             .pipe(gulp.dest('./build/dist'));
     } catch (error) {
             console.log(error.message);
@@ -174,7 +186,7 @@ let executaTarefasDist = async function(){
         // minificaJS();
         minificaTerserJS();
         // inicia tarefas em paralelo
-        gulp.parallel(comprimeImagens(), execSubstituicaoDist());
+        gulp.parallel(comprimeImagensDist(), execSubstituicaoDist());
     } catch (error) {
         console.log(error.message);
     }
