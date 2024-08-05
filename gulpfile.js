@@ -120,7 +120,7 @@ let execSubstituicaoDist = function() {
         return gulp.src(['./prebuild/index.html'])
             .pipe(replace('ARQUIVO_CSS', './css/index.css'))
             .pipe(replace('ARQUIVO_JS', './js/index.js'))
-            .pipe(replace('LOCAL_IMG', '../imagens'))
+            .pipe(replace('./imagens', '../imagens'))
             .pipe(gulp.dest('./build/dist'));
     } catch (error) {
             console.log(error.message);
