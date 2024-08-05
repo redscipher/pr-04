@@ -10,36 +10,7 @@ const terser = require('gulp-terser');
 const clean = require('gulp-clean');
 const pipeline = require('readable-stream').pipeline;
 
-// funcoes ==> ambos ambientes
-let comprimeImagens = function(){
-    try {
-        console.log('comprimindo imagens');
-        // objeto
-        let obj = gulp.src(['./imagens/**/*'])
-                    .pipe(imagemin())
-                    .pipe(gulp.dest('./build/dev/imagens'));
-        // def retorno
-        return obj;
-    } catch (error) {
-        console.log(error.message);
-    }
-}
-
-let comprimeImagensDist = function(){
-    try {
-        console.log('comprimindo imagens');
-        // objeto
-        let obj = gulp.src(['./imagens/**/*'])
-                    .pipe(imagemin())
-                    .pipe(gulp.dest('./build/dist/imagens'));
-        // def retorno
-        return obj;
-    } catch (error) {
-        console.log(error.message);
-    }
-}
-
-// dev
+// funcoes ==> dev
 let compilaSASS = function(){
     try {
         console.log('compilando sass dev');
@@ -63,6 +34,7 @@ let execSubstituicao = function() {
         return gulp.src(['./index.html'])
             .pipe(replace('ARQUIVO_CSS', './css/index.css'))
             .pipe(replace('ARQUIVO_JS', '../../src/js/index.js'))
+            .pipe(replace('./imagens', '../../imagens'))
             .pipe(gulp.dest('./build/dev'));
     } catch (error) {
             console.log(error.message);
@@ -75,7 +47,7 @@ let executaTarefas = async function(){
         // tarefas
         compilaSASS();
         // inicia tarefas em pararelo
-        gulp.parallel(comprimeImagens(), execSubstituicao());
+        execSubstituicao();
     } catch (error) {
         console.log(error.message);
     }
@@ -92,6 +64,20 @@ let executaWatch = function(){
 }
 
 // producao
+let comprimeImagensDist = function(){
+    try {
+        console.log('comprimindo imagens');
+        // objeto
+        let obj = gulp.src(['./imagens/**/*'])
+                    .pipe(imagemin())
+                    .pipe(gulp.dest('./build/dist/imagens'));
+        // def retorno
+        return obj;
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
 let compilaSASSDist = function(){
     try {
         console.log('compilando sass dist')
