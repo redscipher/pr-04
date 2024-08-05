@@ -9,16 +9,28 @@
 </head>
 <body>
     <!-- cab -->
-    <header>
-        
+    <header class="cabecalho">
+        <div class="cabecalho__container">
+            <h1>
+                <img class="cabecalho__logo" src="../imagens/disneyplus.svg" alt="Disney+">
+            </h1>
+            <ul class="cabecalho__links">
+                <li class="cabecalho__links__item">
+                    <a href="#" class="botoes botoes--secundario">Assine agora</a>
+                </li>
+                <li class="cabecalho__links__item">
+                    <a href="#" class="botoes botoes--escuro">Entrar</a>
+                </li>
+            </ul>
+        </div>
     </header>
     <!-- principal -->
     <main>
         <section class="hero">
             <div class="hero__conteudo">
-                <h1 class="hero__conteudo__marca">
+                <div class="hero__conteudo__marca">
                     <img src="../imagens/disneyplus.svg" alt="Disney plus">
-                </h1>
+                </div>
                 <h3 class="titulo--pequeno">
                     As melhores histórias em um só lugar.
                 </h3>
@@ -154,7 +166,10 @@
             </div>
         </section>
         <section class="imagem-texto-sessao imagem-texto-sessao--imagem-cheia">
-            <img src="../imagens/fundo_rei_leao.png" alt="Rei Leão">
+            <picture>
+                <source media="(max-width: 767px)" srcset="../imagens/fundo_rei_leao_celular.png">
+                <img src="../imagens/fundo_rei_leao.png" alt="Rei Leão">
+            </picture>
             <div class="imagem-texto-sessao__texto imagem-texto-sessao--imagem-cheia__texto">
                 <h2 class="titulo">Baixe filmes e séries</h2>
                 <p class="texto--grande">

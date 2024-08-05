@@ -4,8 +4,39 @@ document.addEventListener('DOMContentLoaded', function(){
     // constantes
     const botoes = document.querySelectorAll('[data-aba-botao]');
     const perguntas = document.querySelectorAll('[data-faq-pergunta]');
+    // heroi
+    const heroi = document.querySelector('.hero');
+    const alturaHeroi = heroi.clientHeight;
+
+    window.addEventListener('scroll', function(){
+        const posAtual = window.scrollY;
+
+        if(posAtual < alturaHeroi){
+            ocultaCabecalho();
+        }else{
+            exibeCabecalho();
+        }
+    });
 
     // funcoes
+    let ocultaCabecalho = function(){
+        try {
+            const cabecalho = document.querySelector('header');
+            cabecalho.classList.add('cabecalho--oculto');
+        } catch (error) {
+            console.error(e)
+        }
+    }
+
+    let exibeCabecalho = function(){
+        try {
+            const cabecalho = document.querySelector('header');
+            cabecalho.classList.remove('cabecalho--oculto');
+        } catch (error) {
+            console.error(e)
+        }
+    }
+
     let execEscondeAbas = function(){
         try {
             // busca todas abas

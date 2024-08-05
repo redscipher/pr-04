@@ -22,7 +22,11 @@
 
         &--is-ativo{
             display: grid;
+        }
 
+        // responsividade
+        @media (max-width: 767px) {
+            grid-template-columns: repeat(2, 1fr);
         }
     }
 
@@ -45,6 +49,18 @@
             &--is-ativo{
                 border-bottom: 5px solid variaveis.$corTextoSecundario;
             }
+
+            // responsividade
+            @media (max-width: 767px) {
+                font-size: 16px;
+            }
+        }
+
+        // responsividade
+        @media (max-width: 767px) {
+            white-space: nowrap;
+            overflow-x: scroll;
+            padding-left: 20px;
         }
     }
 }

@@ -6,6 +6,7 @@ const imagemin = require('gulp-imagemin');
 const htmlmin = require('gulp-htmlmin');
 const replace = require('gulp-replace');
 const uglify = require('gulp-uglify');
+const terser = require('gulp-terser');
 const clean = require('gulp-clean');
 const pipeline = require('readable-stream').pipeline;
 
@@ -60,7 +61,7 @@ let executaTarefas = async function(){
         // tarefas
         compilaSASS();
         // inicia tarefas em pararelo
-        gulp.series(comprimeImagens(), execSubstituicao());
+        gulp.parallel(comprimeImagens(), execSubstituicao());
     } catch (error) {
         console.log(error.message);
     }
@@ -102,7 +103,8 @@ let minificaHTML = function(){
         return gulp.src(['./index.html'])
             .pipe(htmlmin({
                 collapseWhitespace: true,
-                removeComments: true
+                removeComments: true,
+                allowEmpty: true
             }))
             .pipe(gulp.dest('./prebuild'));
     } catch (error) {
@@ -127,10 +129,23 @@ let minificaJS = function(){
     try {
         console.log('minificando js dist');
         // executa compressoes js
-        return pipeline(gulp.src(['./src/js/*.js']),
-                    uglify(),
-                    gulp.dest('./build/dist/js')
-                );
+        return gulp.src(['./src/js/**/*.js'])
+                .pipe(uglify().on('error', function(e){
+                    console.log('erro eh: ' + e);
+                 }))
+                .pipe(gulp.dest('./build/dist/js'));
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
+let minificaTerserJS = function(){
+    try {
+        console.log('minificando js dist');
+        // executa compressoes js
+        return gulp.src(['./src/js/**/*.js'])
+                .pipe(terser())
+                .pipe(gulp.dest('./build/dist/js'));
     } catch (error) {
         console.log(error.message);
     }
@@ -153,20 +168,19 @@ let executaTarefasDist = async function(){
     try {
         console.log('tarefas dist');
         // executa tarefas em serie
-        minificaHTML()
-        compilaSASSDist()
+        compilaSASSDist();
         // minificaJS();
+        minificaTerserJS();
         // inicia tarefas em paralelo
         gulp.parallel(comprimeImagens(), execSubstituicaoDist());
-        // ----------
-        deletaTemps();
     } catch (error) {
         console.log(error.message);
     }
 }
 
 // tarefas
-gulp.task('default', gulp.parallel(executaTarefas));
-gulp.task('watch', gulp.parallel(executaWatch));
+gulp.task('default', executaTarefas);
+gulp.task('watch', executaWatch);
 // compila producao
-gulp.task('compila_prod', gulp.parallel(executaTarefasDist));
+gulp.task('compila_prod', gulp.series(minificaHTML, executaTarefasDist, deletaTemps));
+gulp.task('html', minificaHTML);

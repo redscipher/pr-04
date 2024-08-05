@@ -8,6 +8,7 @@
 @use './configs/dispositivos';
 @use './configs/faqs';
 @use './rodape';
+@use './cabecalho';
 
 // elementos
 body{
@@ -17,26 +18,56 @@ body{
 // classes
 .texto--grande{
     @include mixins.texto(18px);
+
+    // responsividade
+    @media (max-width:767px){
+        @include mixins.texto(15px);
+     } 
 }
 
 .texto{
     @include mixins.texto;
+
+    // responsividade
+    @media (max-width:767px){
+        @include mixins.texto(14px);
+     } 
 }
 
 .texto--pequeno{
     @include mixins.texto(12px);
+
+    // responsividade
+    @media (max-width:767px){
+        @include mixins.texto(11px);
+     } 
 }
 
 .titulo--grande{
     @include mixins.titulo(48px);
+
+    // responsividade
+    @media (max-width:767px){
+        @include mixins.titulo(26px);
+     } 
 }
 
 .titulo{
     @include mixins.titulo(40px);
+
+     // responsividade
+     @media (max-width:767px){
+        @include mixins.titulo(24px);
+     } 
 }
 
 .titulo--pequeno{
     @include mixins.titulo(28px);
+
+    // responsividade
+    @media (max-width:767px){
+        @include mixins.titulo(22px);
+     } 
 }
 
 .link-texto{
@@ -46,17 +77,43 @@ body{
 }
 
 .botoes{
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     height: 60px;
     font-size: 16px;
     color: variaveis.$corTextoPrincipal;
-    background-color: #6421ff;
+    background-color: variaveis.$corDeBotoesPrimario;
     text-transform: uppercase;
     border-radius: 4px;
-    // margens
-    margin-top: 2vw;
-    margin-bottom: 8px;
+    text-decoration: none;
+    padding: 8px 14px;
+    letter-spacing: 1px;
+    border: 1px solid variaveis.$corDeBotoesPrimario;
+
+    &:hover{
+        background-color: lighten(variaveis.$corDeBotoesPrimario, 3%);
+    }
+
+    &--secundario{
+        background-color: variaveis.$corDeBotoesSecundario;
+        border-color: variaveis.$corDeBotoesSecundario;
+
+        &:hover{
+            background-color: lighten(variaveis.$corDeBotoesSecundario, 3%);
+        }
+    }
+
+    &--escuro{
+        background-color: rgba(variaveis.$corDeBotoesEscuro, 0.8);
+        border-color: variaveis.$corTextoSecundario;
+
+        &:hover{
+            background-color: variaveis.$corTextoSecundario;
+            color: variaveis.$corDeFundo;
+        }
+    }
 }
 
 .imagem-texto-sessao{
@@ -94,6 +151,18 @@ body{
             display: flex;
             flex-direction: column;
             justify-content: center;
+
+            // responsividade
+            @media (max-width:767px){
+                position: relative;
+                left: 0;
+                width: 100%;
+            } 
         }
     }
+
+     // responsividade
+     @media (max-width:767px){
+        display: block; 
+    } 
 }

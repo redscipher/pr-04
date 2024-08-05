@@ -1,0 +1,72 @@
+@use './variaveis';
+
+.cabecalho{
+    position: sticky;
+    top: 0;
+    left: 0;
+    background-color: variaveis.$corDeFundo;
+    transition: background-color 0.5s ease;
+    z-index: 1;
+
+    // classes
+    &--oculto{
+        background-color: transparent;
+        transition: background-color 0.5s ease;
+
+        .cabecalho{
+
+            // classes
+            &__logo
+            ,&__links__item:first-child{
+                opacity: 0;
+                visibility: hidden;
+                transition: opacity 0.5s ease;
+            }
+        }
+    }
+
+    &__container{
+        padding: 8px 36px;
+        display: flex;
+        justify-content: space-between;
+
+        // responsividade
+        @media (max-width:767px){
+            padding: 0 12px 0 20px;
+        }
+    }
+
+    &__logo{
+        max-width: 80px;
+        width: 100%;
+        margin: 5px;
+        transition: opacity 0.5s ease;
+
+        // responsividade
+        @media (max-width:767px){
+            max-width: 64px;
+        }
+    }
+
+    &__links{
+        display: flex;
+
+        // classes
+        &__item{
+            margin: 5px;
+            transition: opacity 0.5s ease;
+        }
+    }
+
+    .butoes{
+        height: 50px;
+
+        // responsividade
+        @media (max-width:767px){
+            font-size: 13px;
+            padding: 8px 11px;
+            height: 40px;
+            letter-spacing: 0;
+        }
+    }
+}
